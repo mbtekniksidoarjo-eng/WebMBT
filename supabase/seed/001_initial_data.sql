@@ -284,7 +284,7 @@ values
   ('whatsapp_default_message', 'Halo Maju Berkah Teknik, saya ingin bertanya mengenai produk dinamo motor / gear box. Mohon dibantu untuk rekomendasi spesifikasi yang sesuai.', 'Pesan default WhatsApp'),
   ('company_address', 'Pondok Mutiara Blok AA no 6 Sidoarjo', 'Alamat perusahaan'),
   ('company_email', 'mbtekniksidoarjo@gmail.com', 'Email perusahaan'),
-  ('site_url', 'https://maju-berkah-teknik.vercel.app', 'URL website setelah deploy')
+  ('site_url', 'https://www.mbdinamo.com', 'URL website setelah deploy')
 on conflict (key) do update set
   value = excluded.value,
   description = excluded.description;
