@@ -31,6 +31,6 @@ export async function clearCmsAuthCookie() {
 }
 
 export function validateCmsPassword(password: string) {
-  const expectedPassword = process.env.CMS_ADMIN_PASSWORD;
-  return Boolean(expectedPassword && password === expectedPassword);
+  const expectedPassword = process.env.CMS_ADMIN_PASSWORD?.trim();
+  return Boolean(expectedPassword && password.trim() === expectedPassword);
 }

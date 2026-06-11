@@ -156,7 +156,7 @@ export default async function Home() {
         <MessageCircle size={20} /> WhatsApp
       </a>
 
-      <Footer />
+      <Footer settings={cms.settings} />
     </main>
   );
 }
