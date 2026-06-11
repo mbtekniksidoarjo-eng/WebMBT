@@ -1,0 +1,18 @@
+{
+  "name": "Maju Berkah Teknik",
+  "short_name": "MBT",
+  "description": "Supplier dinamo motor dan gear box industri di Sidoarjo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0f172a",
+  "lang": "id-ID",
+  "icons": [
+    {
+      "src": "/images/logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

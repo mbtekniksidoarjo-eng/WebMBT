@@ -3,7 +3,8 @@ import { ArrowRight, BadgeCheck, Boxes, Factory, Filter, Gauge, MessageCircle, P
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { ProductCard } from '@/components/ProductCard';
-import { getCmsData, getContent } from '@/lib/cms';
+import { getCmsData, getContent, getSetting } from '@/lib/cms';
+import { absoluteUrl, siteConfig } from '@/lib/site';
 import { defaultWhatsappMessage, whatsappLink } from '@/lib/whatsapp';
 
 export default async function Home() {
@@ -11,9 +12,64 @@ export default async function Home() {
   const heroContent = getContent(cms.contents, 'hero');
   const aboutContent = getContent(cms.contents, 'about');
   const ctaMessage = defaultWhatsappMessage;
+  const companyAddress = getSetting(cms.settings, 'company_address', siteConfig.address);
+  const companyEmail = getSetting(cms.settings, 'company_email', siteConfig.email);
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': absoluteUrl('/#organization'),
+        name: siteConfig.name,
+        url: siteConfig.url,
+        logo: absoluteUrl(siteConfig.logo),
+        email: companyEmail,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: companyAddress,
+          addressLocality: 'Sidoarjo',
+          addressRegion: 'Jawa Timur',
+          addressCountry: 'ID',
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'sales',
+          telephone: siteConfig.phone,
+          email: companyEmail,
+          areaServed: 'ID',
+          availableLanguage: ['id'],
+        },
+      },
+      {
+        '@type': 'WebSite',
+        '@id': absoluteUrl('/#website'),
+        url: siteConfig.url,
+        name: siteConfig.name,
+        description: siteConfig.description,
+        publisher: { '@id': absoluteUrl('/#organization') },
+        inLanguage: 'id-ID',
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': absoluteUrl('/#faq'),
+        mainEntity: cms.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
+  };
 
   return (
     <main className="min-h-screen bg-slate-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
+      />
       <Header />
       {cms.notice ? (
         <div className="bg-amber-50 px-4 py-3 text-center text-sm font-semibold text-amber-800">
@@ -38,7 +94,7 @@ export default async function Home() {
               <a href={whatsappLink(ctaMessage)} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-4 font-extrabold text-white shadow-xl shadow-orange-500/25 transition hover:bg-orange-600">
                 <PhoneCall size={19} /> Minta Penawaran via WhatsApp
               </a>
-              <a href="#produk" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-4 font-bold text-white backdrop-blur transition hover:bg-white/15">
+              <a href="#produk" className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-4 font-bold text-slate-950 shadow-sm transition hover:border-blue-200 hover:bg-blue-50">
                 Lihat Katalog Produk <ArrowRight size={18} />
               </a>
             </div>
@@ -54,7 +110,7 @@ export default async function Home() {
           <div className="relative z-10">
             <div className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-slate-200/70">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-slate-900">
-                <Image src={heroContent?.image_url || '/images/products/3_Phase_Foot_Mounted_B3/1.jpeg'} alt="Dinamo motor industri Maju Berkah Teknik" fill priority className="object-cover" />
+                <Image src={heroContent?.image_url || '/images/products/3_Phase_Foot_Mounted_B3/1.jpeg'} alt="Dinamo motor industri Maju Berkah Teknik" fill priority fetchPriority="high" className="object-cover" sizes="(max-width: 1024px) 100vw, 48vw" />
               </div>
               <div className="grid gap-4 p-4 sm:grid-cols-3">
                 <HeroStat value="0,18–315 KW" label="Kapasitas 3 phase" />
@@ -81,7 +137,7 @@ export default async function Home() {
           {cms.categories.map((category) => (
             <article key={category.title} className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl">
               <div className="relative aspect-[4/3] bg-slate-100">
-                <Image src={category.image} alt={category.title} fill className="object-cover" />
+                <Image src={category.image} alt={`${category.title} Maju Berkah Teknik`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-black text-slate-950">{category.title}</h3>
@@ -152,7 +208,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <a href={whatsappLink(ctaMessage)} target="_blank" rel="noreferrer" className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-green-500 px-5 py-4 text-sm font-black text-white shadow-2xl shadow-green-500/30 transition hover:bg-green-600">
+      <a href={whatsappLink(ctaMessage)} target="_blank" rel="noreferrer" aria-label="Hubungi Maju Berkah Teknik via WhatsApp" className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-green-500 px-5 py-4 text-sm font-black text-white shadow-2xl shadow-green-500/30 transition hover:bg-green-600">
         <MessageCircle size={20} /> WhatsApp
       </a>
 

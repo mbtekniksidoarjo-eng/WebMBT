@@ -54,6 +54,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 NEXT_PUBLIC_WHATSAPP_NUMBER=628xxxxxxxxxx
 NEXT_PUBLIC_COMPANY_ADDRESS=Pondok Mutiara Blok AA no 6 Sidoarjo
 NEXT_PUBLIC_COMPANY_EMAIL=mbtekniksidoarjo@gmail.com
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=google_search_console_token
 NEXT_PUBLIC_SITE_URL=https://maju-berkah-teknik.vercel.app
 ```
 
@@ -142,6 +143,7 @@ CMS_ADMIN_PASSWORD=change-this-strong-password
 NEXT_PUBLIC_WHATSAPP_NUMBER=628xxxxxxxxxx
 NEXT_PUBLIC_COMPANY_ADDRESS=Pondok Mutiara Blok AA no 6 Sidoarjo
 NEXT_PUBLIC_COMPANY_EMAIL=mbtekniksidoarjo@gmail.com
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=google_search_console_token
 ```
 
 Catatan keamanan:
