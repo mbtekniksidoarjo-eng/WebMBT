@@ -3,9 +3,7 @@ import { logoutCms } from '@/app/cms/actions';
 
 const navItems = [
   { href: '/cms', label: 'Dashboard' },
-  { href: '/cms/products', label: 'Produk' },
-  { href: '/cms/categories', label: 'Kategori' },
-  { href: '/cms/brands', label: 'Brand' },
+  { href: '/cms/products', label: 'Katalog' },
   { href: '/cms/faqs', label: 'FAQ' },
   { href: '/cms/settings', label: 'Settings' },
 ];

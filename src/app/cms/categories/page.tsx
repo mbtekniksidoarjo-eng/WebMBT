@@ -1,4 +1,5 @@
 import { deleteCategory, upsertCategory } from '@/app/cms/actions';
+import { CatalogTabs } from '@/components/cms/CatalogTabs';
 import { CmsLayout } from '@/components/cms/CmsLayout';
 import { CheckboxInput, DeleteButton, SubmitButton, TextArea, TextInput } from '@/components/cms/Fields';
 import { fetchAdminTable } from '@/lib/cms-admin-data';
@@ -12,7 +13,8 @@ export default async function CategoriesPage() {
   const categories = data as Category[];
 
   return (
-    <CmsLayout title="Kategori" description="Create, update, delete kategori produk.">
+    <CmsLayout title="Katalog" description="Kelola produk, kategori, dan brand dalam tab katalog.">
+      <CatalogTabs active="categories" />
       {error ? <Alert text={error} /> : null}
       <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
         <h2 className="text-lg font-black text-slate-950">Tambah Kategori</h2>

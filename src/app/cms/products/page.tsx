@@ -1,4 +1,5 @@
 import { deleteProduct, upsertProduct } from '@/app/cms/actions';
+import { CatalogTabs } from '@/components/cms/CatalogTabs';
 import { CmsLayout } from '@/components/cms/CmsLayout';
 import { CheckboxInput, DeleteButton, SelectInput, SubmitButton, TextArea, TextInput } from '@/components/cms/Fields';
 import { fetchProductAdminData } from '@/lib/cms-admin-data';
@@ -42,7 +43,8 @@ type Product = {
 export default async function ProductsPage() {
   const { products, categories, brands, error } = await fetchProductAdminData();
   return (
-    <CmsLayout title="Produk" description="Create, update, delete produk katalog. Ditampilkan maksimal 200 item pertama untuk performa admin.">
+    <CmsLayout title="Katalog" description="Kelola produk, kategori, dan brand dalam tab katalog.">
+      <CatalogTabs active="products" />
       {error ? <Alert text={error} /> : null}
       <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
         <h2 className="text-lg font-black text-slate-950">Tambah Produk</h2>

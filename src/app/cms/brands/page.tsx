@@ -1,4 +1,5 @@
 import { deleteBrand, upsertBrand } from '@/app/cms/actions';
+import { CatalogTabs } from '@/components/cms/CatalogTabs';
 import { CmsLayout } from '@/components/cms/CmsLayout';
 import { CheckboxInput, DeleteButton, SubmitButton, TextArea, TextInput } from '@/components/cms/Fields';
 import { fetchAdminTable } from '@/lib/cms-admin-data';
@@ -11,7 +12,8 @@ export default async function BrandsPage() {
   const { data, error } = await fetchAdminTable('brands', 'name');
   const brands = data as Brand[];
   return (
-    <CmsLayout title="Brand" description="Create, update, delete brand produk.">
+    <CmsLayout title="Katalog" description="Kelola produk, kategori, dan brand dalam tab katalog.">
+      <CatalogTabs active="brands" />
       {error ? <Alert text={error} /> : null}
       <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200"><h2 className="text-lg font-black text-slate-950">Tambah Brand</h2><BrandForm /></section>
       <div className="mt-8 space-y-4">{brands.map((brand) => <BrandCard key={brand.id} brand={brand} />)}</div>
