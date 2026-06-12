@@ -1,17 +1,22 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import type { Product } from '@/types/product';
 import { whatsappLink } from '@/lib/whatsapp';
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, linkToDetail = true }: { product: Product; linkToDetail?: boolean }) {
   const waMessage = `Halo Maju Berkah Teknik, saya ingin bertanya tentang ${product.name}. Mohon info spesifikasi dan penawarannya.`;
+  const detailHref = product.slug ? `/produk/${product.slug}` : '#';
 
   return (
     <article className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-      <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-        <Image src={product.image} alt={product.name} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
-        <span className="absolute left-4 top-4 rounded-full bg-slate-950/85 px-3 py-1 text-xs font-bold text-white backdrop-blur">{product.category}</span>
-      </div>
+      {linkToDetail ? (
+        <Link href={detailHref} className="block">
+          <ProductCardImage product={product} />
+        </Link>
+      ) : (
+        <ProductCardImage product={product} />
+      )}
       <div className="p-5">
         <div className="mb-3 flex items-center justify-between gap-3">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">{product.brand}</p>
@@ -29,11 +34,27 @@ export function ProductCard({ product }: { product: Product }) {
           {product.gearboxOutput ? <Spec label="Output" value={product.gearboxOutput} /> : null}
         </dl>
 
-        <a href={whatsappLink(waMessage)} target="_blank" rel="noreferrer" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white transition hover:bg-orange-500">
-          <MessageCircle size={17} /> Tanya Produk Ini
-        </a>
+        <div className="mt-5 flex flex-col gap-2">
+          {linkToDetail && product.slug ? (
+            <Link href={detailHref} className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-slate-50">
+              Lihat Detail Produk
+            </Link>
+          ) : null}
+          <a href={whatsappLink(waMessage)} target="_blank" rel="noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white transition hover:bg-orange-500">
+            <MessageCircle size={17} /> Tanya Produk Ini
+          </a>
+        </div>
       </div>
     </article>
+  );
+}
+
+function ProductCardImage({ product }: { product: Product }) {
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+      <Image src={product.image} alt={product.name} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
+      <span className="absolute left-4 top-4 rounded-full bg-slate-950/85 px-3 py-1 text-xs font-bold text-white backdrop-blur">{product.category}</span>
+    </div>
   );
 }
 

@@ -18,6 +18,7 @@ export function Header() {
         <nav className="hidden items-center gap-7 text-sm font-bold text-slate-700 md:flex">
           <Link href="#produk" className="hover:text-orange-500">Produk</Link>
           <Link href="#spesifikasi" className="hover:text-orange-500">Spesifikasi</Link>
+          <Link href="/produk" className="hover:text-orange-500">Katalog</Link>
           <Link href="#tentang" className="hover:text-orange-500">Tentang</Link>
           <Link href="#faq" className="hover:text-orange-500">FAQ</Link>
         </nav>

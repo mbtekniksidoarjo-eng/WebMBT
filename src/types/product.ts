@@ -14,4 +14,5 @@ export type Product = {
   gearboxType?: string;
   gearboxOutput?: string;
   description: string;
+  slug?: string;
 };
