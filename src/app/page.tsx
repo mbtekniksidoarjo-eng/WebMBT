@@ -185,20 +185,43 @@ export default async function Home() {
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <SectionHeading align="left" eyebrow="Filter Katalog" title="Siap dikembangkan dengan Supabase" description="Data produk bisa dikelola dari Supabase agar admin dapat update produk tanpa mengubah kode website." />
+            <SectionHeading align="left" eyebrow="Filter Katalog" title="Telusuri produk sesuai kebutuhan" description="Pilih kategori produk dan temukan spesifikasi dinamo motor serta gear box yang sesuai untuk mesin Anda." />
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <Feature icon={<Filter />} title="Filter kategori & merk" />
-              <Feature icon={<Gauge />} title="Filter RPM & kapasitas" />
-              <Feature icon={<SlidersHorizontal />} title="Filter size & ratio" />
-              <Feature icon={<Boxes />} title="Detail produk dinamis" />
+              {cms.categories.map((cat) => (
+                <a
+                  key={cat.title}
+                  href="/produk"
+                  className="flex items-center gap-3 rounded-2xl bg-white p-4 font-bold text-slate-900 shadow-sm ring-1 ring-slate-200 transition hover:ring-blue-300 hover:shadow-md"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500 text-white">
+                    <Filter size={18} />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-black">{cat.title}</p>
+                    <p className="truncate text-xs text-slate-500">{cat.specs.slice(0, 2).join(' · ')}</p>
+                  </div>
+                </a>
+              ))}
+              <a
+                href="/produk"
+                className="flex items-center gap-3 rounded-2xl bg-slate-950 p-4 font-bold text-white shadow-sm transition hover:bg-slate-800"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500 text-white">
+                  <Boxes size={18} />
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-black">Semua Produk</p>
+                  <p className="truncate text-xs text-slate-400">Lihat katalog lengkap di halaman produk</p>
+                </div>
+              </a>
             </div>
           </div>
           <div className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-xl">
             <p className="text-sm font-bold uppercase tracking-[0.3em] text-orange-400">Spesifikasi Utama</p>
             <div className="mt-6 grid gap-4">
-              <SpecBlock title="Dinamo Motor 3 Phase" items={['Merk: Motology, Alliance', 'RPM: 3000, 1500, 1000, 750', 'Kapasitas: 0,18 KW – 315 KW / 0,25 HP – 410 HP', 'Tipe: B3, B5, B35']} />
-              <SpecBlock title="Dinamo Motor 1 Phase" items={['Merk: Motology, Alliance', 'RPM: 3000, 1500', 'Kapasitas: 0,18 KW – 4 KW / 0,25 HP – 5 HP', 'Tipe: B3, B5, B35']} />
-              <SpecBlock title="Gear Box" items={['Merk: Motology, Alliance', 'Size: 50, 60, 70, 80, 100, 120, 135, 155, 175, 200, 250', 'Ratio: 10, 20, 30, 40, 50, 60', 'Tipe: WPA output samping, WPX output bawah, WPO output atas']} />
+              <SpecBlock title="Dinamo Motor 3 Phase" items={['Merk: Motology, Alliance', 'RPM: 3000, 1500, 1000, 750', 'Kapasitas: 0,18 KW – 315 KW / 0,25 HP – 410 HP', 'Mounting: B3 (Foot), B5 (Flange), B35 (Foot+Flange)']} />
+              <SpecBlock title="Dinamo Motor 1 Phase" items={['Merk: Motology, Alliance', 'RPM: 3000, 1500', 'Kapasitas: 0,18 KW – 4 KW / 0,25 HP – 5 HP', 'Mounting: B3 (Foot), B5 (Flange), B35 (Foot+Flange)']} />
+              <SpecBlock title="Gear Box" items={['Merk: Motology, Alliance', 'Size: 50, 60, 70, 80, 100, 120, 135, 155, 175, 200, 250', 'Ratio: 10, 20, 30, 40, 50, 60', 'Tipe: WPA (output samping), WPX (output bawah), WPO (output atas)']} />
             </div>
           </div>
         </div>
