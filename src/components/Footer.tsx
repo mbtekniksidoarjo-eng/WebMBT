@@ -1,14 +1,16 @@
 import Image from 'next/image';
-import { Mail, MapPin, PhoneCall } from 'lucide-react';
+import { Mail, MapPin, Phone, PhoneCall } from 'lucide-react';
 import { getSetting, type CmsSetting } from '@/lib/cms';
 import { defaultWhatsappMessage, whatsappLink } from '@/lib/whatsapp';
 
 const defaultAddress = process.env.NEXT_PUBLIC_COMPANY_ADDRESS || 'Pondok Mutiara Blok AA no 6 Sidoarjo';
 const defaultEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL || 'mbtekniksidoarjo@gmail.com';
+const defaultPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+6285337625233';
 
 export function Footer({ settings = [] }: { settings?: CmsSetting[] }) {
   const address = getSetting(settings, 'company_address', defaultAddress);
   const email = getSetting(settings, 'company_email', defaultEmail);
+  const phone = getSetting(settings, 'company_phone', defaultPhone);
 
   return (
     <footer id="kontak" className="bg-slate-950 text-white">
@@ -37,6 +39,7 @@ export function Footer({ settings = [] }: { settings?: CmsSetting[] }) {
           <h3 className="mb-3 font-bold">Hubungi Kami</h3>
           <div className="space-y-3 text-sm text-slate-300">
             <p className="flex gap-2"><MapPin size={17} className="mt-0.5 shrink-0" /> {address}</p>
+            <p className="flex gap-2"><Phone size={17} className="mt-0.5 shrink-0" /> {phone}</p>
             <a href={`mailto:${email}`} className="flex gap-2 hover:text-white">
               <Mail size={17} className="mt-0.5 shrink-0" /> {email}
             </a>

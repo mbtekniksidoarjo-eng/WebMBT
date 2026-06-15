@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowRight, BadgeCheck, Boxes, Factory, Filter, Gauge, MessageCircle, PhoneCall, ShieldCheck, SlidersHorizontal, Wrench } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Boxes, Download, Factory, Filter, Gauge, MessageCircle, PhoneCall, ShieldCheck, SlidersHorizontal, Wrench } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { ProductCard } from '@/components/ProductCard';
@@ -150,6 +150,26 @@ export default async function Home() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section id="katalog" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-white shadow-xl sm:p-12">
+          <div className="grid items-center gap-8 md:grid-cols-[1fr_auto]">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.3em] text-blue-200">Download Katalog</p>
+              <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">Katalog Lengkap Maju Berkah Teknik</h2>
+              <p className="mt-4 max-w-xl text-base leading-8 text-blue-100">
+                Lihat seluruh produk dinamo motor &amp; gear box dalam satu file. Unduh katalog PDF lengkap dengan spesifikasi dan harga terkini.
+              </p>
+            </div>
+            <a
+              href="/catalog/katalog-mbt.jpeg"
+              download
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-extrabold text-blue-700 shadow-lg transition hover:bg-blue-50">
+              <Download size={20} /> Download Katalog
+            </a>
+          </div>
         </div>
       </section>
 
