@@ -5,4 +5,11 @@ export function whatsappLink(message: string, number = DEFAULT_NUMBER) {
 }
 
 export const defaultWhatsappMessage =
-  'Halo Maju Berkah Teknik, saya ingin bertanya mengenai produk dinamo motor / gear box. Mohon dibantu untuk rekomendasi spesifikasi yang sesuai.';
+  `Halo Maju Berkah Teknik, saya ingin bertanya kebutuhan dinamo/gearbox.
+Nama:
+Lokasi:
+Kebutuhan:
+Daya/HP:
+RPM:
+1 phase / 3 phase:
+Foto mesin jika ada:`;
