@@ -166,6 +166,8 @@ export default async function Home() {
             <a
               href="/catalog/katalog-mbt.jpeg"
               download
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-extrabold text-blue-700 shadow-lg transition hover:bg-blue-50">
               <Download size={20} /> Download Katalog
             </a>
