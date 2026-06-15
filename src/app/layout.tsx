@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { absoluteUrl, siteConfig } from '@/lib/site';
 import './globals.css';
 
@@ -84,7 +85,22 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id">
-      <body>{children}</body>
+      <body>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18239114550"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18239114550');
+          `}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }
