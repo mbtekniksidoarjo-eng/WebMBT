@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { absoluteUrl, siteConfig } from '@/lib/site';
 import './globals.css';
 
@@ -97,8 +98,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-18239114550');
+            gtag('config', 'G-G8LKHNZJS2');
           `}
         </Script>
+        <GoogleAnalytics />
         {children}
       </body>
     </html>
